@@ -1,3 +1,28 @@
+<#
+.SYNOPSIS
+Creates a DNS record using porkbun api
+
+.PARAMETER name
+subdomain name
+
+.PARAMETER domain
+domain name to update
+
+.PARAMETER type
+type of record eg A
+
+.PARAMETER content
+Content to add such as an ip address
+
+.PARAMETER ttl
+Time to live
+
+.EXAMPLE
+An example
+
+.NOTES
+General notes
+#>
 function New-PorkBunDnsRecord {
     [CmdletBinding()]
     param (
