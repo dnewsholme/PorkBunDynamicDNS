@@ -1,5 +1,5 @@
 try {
-    import-module "$PSScriptRoot\PorkBunDns.psm1" -ErrorAction stop
+    import-module "$PSScriptRoot\PorkBunDNS\PorkBunDns.psm1" -ErrorAction stop
 }
 Catch {
     import-module ".\PorkBunDns.psm1"
