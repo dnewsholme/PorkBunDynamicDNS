@@ -11,7 +11,7 @@ else { $frequency = 300 }
 
 While ($loop -ne $false) {
     # Get List of Domains to update
-    $porkbundynamicdnsdomains = $env:porkbundynamicdnsdomains.Split(" ")
+    $porkbundynamicdnsdomains = $env:porkbundynamicdnsdomains.Split(",")
     # Get External IP
     $ip = (Test-PorkBunApi -verbose).yourIP
     #$ip = "8.8.8.8"
