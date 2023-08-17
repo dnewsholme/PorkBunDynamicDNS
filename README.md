@@ -1,4 +1,4 @@
-# PorkBunDNS
+# PorkBunDynamicDNS
 A Powershell based method for updating dns records using porkbun api.
 
 ![Porkbun](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlGfR-5h2F1Wnx1_sk_QCo8QIAeIGVTe8Uhrt6alsu&s)
