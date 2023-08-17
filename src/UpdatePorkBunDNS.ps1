@@ -13,7 +13,7 @@ While ($loop -ne $false) {
     # Get List of Domains to update
     $porkbundynamicdnsdomains = $env:porkbundynamicdnsdomains.Split(" ")
     # Get External IP
-    $ip = (Test-PorkBunApi).yourIP
+    $ip = (Test-PorkBunApi -verbose).yourIP
     #$ip = "8.8.8.8"
     foreach ($domainname in $porkbundynamicdnsdomains) {
         Write-Host "[$(Get-Date -format G)] Processing $domainname"
@@ -29,14 +29,14 @@ While ($loop -ne $false) {
         }
         # Check for an existing record before creating a new one.
         try {
-            $result = Get-PorkBunDnsRecord -domain $domain -Subdomain $subdomain -Type A
+            $result = Get-PorkBunDnsRecord -domain $domain -Subdomain $subdomain -Type A -verbose
         }
         Catch {
             if ($_.ErrorDetails.Message -like "*Invalid domain*") {
                 # The split may have gone wrong due to being a record for the root of the domain so try again with only the domain name.
                 $domain = $domainname
                 $subdomain = $null
-                $result = Get-PorkBunDnsRecord -domain $domainname -Type A
+                $result = Get-PorkBunDnsRecord -domain $domainname -Type A -verbose
             }
         }
         if ($result.content -eq $ip) {
@@ -46,7 +46,7 @@ While ($loop -ne $false) {
         if ($null -eq $result) {
             Write-Host "[$(Get-Date -format G)] No Existing Record Creating a new one"
             # Create a new dns record
-            New-PorkBunDnsRecord -name $subdomain -domain $domain -type A -ttl 600 -content $ip
+            New-PorkBunDnsRecord -name $subdomain -domain $domain -type A -ttl 600 -content $ip -verbose
         }
         Else {
             Write-Host "[$(Get-Date -format G)] IP Doesn't match Updating record"
