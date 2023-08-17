@@ -13,7 +13,7 @@ While ($loop -ne $false) {
     # Get List of Domains to update
     $porkbundynamicdnsdomains = $env:porkbundynamicdnsdomains.Split(",")
     # Get External IP
-    $ip = (Test-PorkBunApi -verbose).yourIP
+    $ip = (Test-PorkBunApi).yourIP
     #$ip = "8.8.8.8"
     foreach ($domainname in $porkbundynamicdnsdomains) {
         Write-Host "[$(Get-Date -format G)] Processing $domainname"
@@ -29,14 +29,14 @@ While ($loop -ne $false) {
         }
         # Check for an existing record before creating a new one.
         try {
-            $result = Get-PorkBunDnsRecord -domain $domain -Subdomain $subdomain -Type A -verbose
+            $result = Get-PorkBunDnsRecord -domain $domain -Subdomain $subdomain -Type A
         }
         Catch {
             if ($_.ErrorDetails.Message -like "*Invalid domain*") {
                 # The split may have gone wrong due to being a record for the root of the domain so try again with only the domain name.
                 $domain = $domainname
                 $subdomain = $null
-                $result = Get-PorkBunDnsRecord -domain $domainname -Type A -verbose
+                $result = Get-PorkBunDnsRecord -domain $domainname -Type A
             }
         }
         if ($result.content -eq $ip) {
@@ -46,12 +46,12 @@ While ($loop -ne $false) {
         if ($null -eq $result) {
             Write-Host "[$(Get-Date -format G)] No Existing Record Creating a new one"
             # Create a new dns record
-            New-PorkBunDnsRecord -name $subdomain -domain $domain -type A -ttl 600 -content $ip -verbose
+            New-PorkBunDnsRecord -name $subdomain -domain $domain -type A -ttl 600 -content $ip
         }
         Else {
             Write-Host "[$(Get-Date -format G)] IP Doesn't match Updating record"
             # Otherwise update the existing record
-            Update-PorkBunDnsRecord -name $subdomain -domain $domain -type A -ttl 600 -content $ip -Verbose
+            Update-PorkBunDnsRecord -name $subdomain -domain $domain -type A -ttl 600 -content $ip
         }
     }
     Start-Sleep -Seconds $frequency
