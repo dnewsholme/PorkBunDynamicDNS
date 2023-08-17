@@ -1,13 +1,16 @@
 <#
 .SYNOPSIS
-    Tests your api credentials against the pork bun api and returns your current external ip address.
-.DESCRIPTION
-    Tests your api credentials against the pork bun api and returns your current external ip address.
+   Gets a record from the porkbun dns api
+.PARAMETER domain
+    The domain to get the record from
+.PARAMETER subdomain
+    subdomain if you would like to filter the records. Leave blank to get all
+.PARAMETER type
+    Type of records to retrieve eg A. Leave blank to get all
 .EXAMPLE
-   Test-Porkbunapi
-.EXAMPLE
-    Test-Porkbunapi -apikey xxxxxxxxxxxxxxxxxx -apisecret xxxxxxxxxxxxxxx
+    Get-PorkBunDnsRecord -domain example.com
 #>
+
 function Get-PorkBunDnsRecord {
     [CmdletBinding()]
     [OutputType([int])]

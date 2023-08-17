@@ -1,4 +1,25 @@
+<#
+.SYNOPSIS
+Removes a Record from porkbun dns
 
+.PARAMETER ID
+ID of Record to be removed (optional)
+
+.PARAMETER domain
+Domain the record resides on
+
+.PARAMETER Subdomain
+The domain record to be removed
+
+.PARAMETER Type
+Type of record eg A
+
+.EXAMPLE
+Remove-PorkBunDnsRecord -domain example.com -subdomain support -type A
+
+.NOTES
+General notes
+#>
 function Remove-PorkBunDnsRecord {
     [CmdletBinding()]
     param(
