@@ -64,8 +64,8 @@ function Invoke-PorkBunApi {
             $body | Add-Member NoteProperty -Name secretapikey -Value $Apisecret
         }
         Write-Verbose "$($body | ConvertTo-Json)"
-        Write-Verbose "https://porkbun.com/$uri"
-        Invoke-RestMethod "https://porkbun.com/$uri" -Body ($body | ConvertTo-Json) -Method Post
+        Write-Verbose "https://api.porkbun.com/$uri"
+        Invoke-RestMethod "https://api.porkbun.com/$uri" -Body ($body | ConvertTo-Json) -Method Post
 
     }
 
